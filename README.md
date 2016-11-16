@@ -1,5 +1,13 @@
 # spark-ml-lr-ExoplanetsClassification
 Build a classification model of exoplanets labeled "confirmed" or "false-positive". we will use Spark Machine Learning Logistic regression written in Scala for building our model.
+
+============
+Team
+============
+
+
+* [Eric FOKOU](https://github.com/ericfokou/)
+* [Willie DROUHET](https://github.com/drwi)
    
 =============
 Setup 
@@ -33,25 +41,25 @@ The data on exoplanets are public and accessible [link] (http://exoplanetarchive
 Installation
 ============
 
-Download the project, then unpack it. Import it into IntelliJ; run teh following command:
-* In the homepage click on "import project".
-* Select the path to the decompressed project.
-* Select "import project from external model", and select SBT => next
-* Select "use auto import" => finish
-* SBT project data to import: check that both folders are selected => OK
-* Waiting for the project to be loaded and its dependencies
+Download the project in a local directory
 
-============
-Run
-============
+```
+git clone https://github.com/ericfokou/spark-ml-lr-ExoplanetsClassification.git
+```
 
-Compile and create a jar file
+Go to into the imported directory (spark-ml-lr-ExoplanetsClassification) and run following command:
 
 ```
 sbt assembly
 ```
 
-In a terminal go where the spark-submit is:
+N.B. : The generated file is located in spark-ml-lr-ExoplanetsClassification/target/scala-2.11/spark-ml-lr-ExoplanetsClassification-assembly-1.0.jar
+
+============
+Run
+============
+
+Go to bin local directory of spark:
 
 ```
 cd spark-2.0.0-bin-hadoop2.6/bin
@@ -59,20 +67,23 @@ cd spark-2.0.0-bin-hadoop2.6/bin
 
 Submit the script. Give three parameters:
 
-* First: path to you jar file (/homes/efokou/spark-ml-lr-ExoplanetsClassification-1.0.jar, for example)
-* Second: dataset file path (/homes/efokou/cleanedDataFrame.parquet, for example)
-* Third: Model file path to save (/homes/efokou/modelPlanet.model, for example)
+* First: absolute path of the .jar (/homes/efokou/spark-ml-lr-ExoplanetsClassification-1.0.jar, for example)
+* Second: dataset file path, ie absolute path of the .parquet copied from the git repo (/homes/efokou/cleanedDataFrame.parquet, for example)
+* Third: absolute path of the model that will be saved (/homes/efokou/modelPlanet.model, for example)
 
-This is one example of 
+The script submission should go along the lines of...
+
+```
+./spark-submit --conf spark.eventLog.enabled=true --conf spark.eventLog.dir="/tmp" --driver-memory 3G --executor-memory 4G --class com.sparkProject.JobML  [absolute path of the .jar] [absolute path of the .parquet copied from the git repo] [absolute path of the model that will be saved]
+```
+
+For example the authors used the following command for running the job:
 
 ```
 ./spark-submit --conf spark.eventLog.enabled=true --conf spark.eventLog.dir="/tmp" --driver-memory 3G --executor-memory 4G --class com.sparkProject.JobML /homes/efokou/spark-ml-lr-ExoplanetsClassification-1.0.jar /homes/efokou/cleanedDataFrame.parquet /homes/efokou/modelPlanet.model
 ```
 
-============
-Team
-============
 
 
-* [Eric FOKOU](https://github.com/ericfokou/)
-* [Willie Drouhet](https://github.com/drwi)
+
+
