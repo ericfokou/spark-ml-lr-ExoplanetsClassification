@@ -72,47 +72,57 @@ object JobML {
       ********************************************************************************/
 
 
-    val df = spark.read.parquet(dataFileName)        // "/cal/homes/efokou/INF729/cleanedDataFrame.parquet"
+    val df = spark.read.parquet(dataFileName)        
     // Return the schema of this DataFrame
     df.printSchema()
 
     /********************************************************************************
       *
-      *        Extraction of Features. To build a classifier model, you first extract the features that most contribute to the classification. For this 	*		 dataset we will remove two features: koi_disposition and rowid. One Important class will be used:
-      *		   VectorAssembler:  used to transform and return a new DataFrame with all of the feature columns in a vector column
+      *        Extraction of Features. To build a classifier model, you first extract
+      *        the features that most contribute to the classification. For this 	
+      *	       dataset we will remove two features: koi_disposition and rowid. One Important 
+      *        class will be used:
+      *	       VectorAssembler:  used to transform and return a new DataFrame with all of the feature columns in a vector column
       *
       ********************************************************************************/
 
     // Get list of features
     var featureCols = df.columns
+
     // define the feature columns to put in the feature vector. Removing of koi_disposition and rowid features
     featureCols = featureCols.filter(x => (!x.contains("koi_disposition") && !x.contains("rowid")))
+
     //set the input and output column names
     val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("features")
+
     //return a dataframe with all of the define feature columns in  a vector column. The transform method produced a new column: features.
     val df1 = assembler.transform(df)
 
     /********************************************************************************
       *
-      *        Creation of a dataframe with the class column "rowid" (“CONFIRMED” or “FALSE-POSITIVE”) added as a label . One Important class will be used:
-      *		   StringIndexer: used to return a Dataframe with the class column added as a label .
+      *        Creation of a dataframe with the class column "rowid" (“CONFIRMED” or “FALSE-POSITIVE”) 
+      *        added as a label . One Important class will be used:
+      *	       StringIndexer: used to return a Dataframe with the class column added as a label .
       *
       ********************************************************************************/
 
     //  Create a label column with the StringIndexer
     val labelIndexer = new StringIndexer().setInputCol("koi_disposition").setOutputCol("label")
+
     // the  transform method produced a new column: label.
     val df2 = labelIndexer.fit(df1).transform(df1).select("features","label")
 
     /********************************************************************************
       *
-      *        Splitting of data into a training data set and a test data set, 90% of the data is used to train the model, and 10% will be used for testing.
+      *        Splitting of data into a training data set and a test data set, 90% of the data is used to 
+      *        train the model, and 10% will be used for testing.
       *
       ********************************************************************************/
 
     var splitSeed = 5043
     val Array(trainingData, testData) = df2.randomSplit(Array(0.9, 0.1), splitSeed)
-    // caching of trainning and testing data in memory. This is useful in practice for iterative algorithm
+
+    // caching of training and testing data in memory. This is useful in practice for iterative algorithm
     trainingData.cache()
     testData.cache()
 
@@ -136,9 +146,11 @@ object JobML {
       *        Using of a ParamGridBuilder to construct a grid of parameters to search over.
       *
       ********************************************************************************/
+
     // We will iterate on log scale for regParam
     val regRange = -6.0 to (0.0, 0.5) toArray
     val regParam = regRange.map(x => math.pow(10,x))
+
     // Building of grid
     val paramGrid = new ParamGridBuilder()
       .addGrid(lr.regParam, regParam)
@@ -158,6 +170,7 @@ object JobML {
       *        Using TrainValidationSplit for hyper-parameter tuning
       *
       ********************************************************************************/
+
     // 70% of the data will be used for training and the remaining 20% for validation.
     val trainValidationSplit = new TrainValidationSplit()
       .setEstimator(lr)
