@@ -69,6 +69,9 @@ This is one example of
 ```
 
 ============
-Contributors
+Team
 ============
 
+
+* [Eric FOKOU](https://github.com/ericfokou/)
+* [Willie Drouhet](https://github.com/drwi)
