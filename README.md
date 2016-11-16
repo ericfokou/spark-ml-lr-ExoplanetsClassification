@@ -30,7 +30,7 @@ Data
 The data on exoplanets are public and accessible [link] (http://exoplanetarchive.ipac.caltech.edu/index.html). There are already 3388 confirmed exoplanets and about as many false positives, our classifier will be trained on these data. There is one exoplanet per line. The column of labels (what we are going to try to predict) is called "koi_disposition". You can retrieve the already cleaned dataset in parquet format in the project directly (cleanedDataFrame.parquet). The classifier will only use information from the brightness curves.
 
 ============
-Install
+Installation
 ============
 
 Download the project, then unpack it. Import it into IntelliJ; run teh following command:
@@ -57,15 +57,16 @@ In a terminal go where the spark-submit is:
 cd spark-2.0.0-bin-hadoop2.6/bin
 ```
 
-Submit the script. Give two parameters:
+Submit the script. Give three parameters:
 
-* First: dataset file path
-* Model file path to save
+* First: path to you jar file (/homes/efokou/spark-ml-lr-ExoplanetsClassification-1.0.jar, for example)
+* Second: dataset file path (/homes/efokou/cleanedDataFrame.parquet, for example)
+* Third: Model file path to save (/homes/efokou/modelPlanet.model, for example)
 
 This is one example of 
 
 ```
-./spark-submit --conf spark.eventLog.enabled=true --conf spark.eventLog.dir="/tmp" --driver-memory 3G --executor-memory 4G --class com.sparkProject.JobML /cal/homes/efokou/INF729/tp_spark/target/scala-2.11/tp_spark-assembly-1.0.jar /homes/efokou/cleanedDataFrame.parquet /homes/efokou/modelPlanet.model
+./spark-submit --conf spark.eventLog.enabled=true --conf spark.eventLog.dir="/tmp" --driver-memory 3G --executor-memory 4G --class com.sparkProject.JobML /homes/efokou/spark-ml-lr-ExoplanetsClassification-1.0.jar /homes/efokou/cleanedDataFrame.parquet /homes/efokou/modelPlanet.model
 ```
 
 ============
