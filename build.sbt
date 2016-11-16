@@ -1,4 +1,4 @@
-name := "tp_spark"
+name := "spark-ml-lr-ExoplanetsClassification"
 version := "1.0"
 scalaVersion := "2.11.4"
 organization := "paristech"
