@@ -95,7 +95,8 @@ object JobML {
     //set the input and output column names
     val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("features")
 
-    //return a dataframe with all of the define feature columns in  a vector column. The transform method produced a new column: features.
+    //return a dataframe with all of the define feature columns in  a vector column. 
+    //The transform method produced a new column: features.
     val df1 = assembler.transform(df)
 
     /********************************************************************************
