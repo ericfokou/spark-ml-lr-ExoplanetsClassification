@@ -47,7 +47,7 @@ Download the project in a local directory
 git clone https://github.com/ericfokou/spark-ml-lr-ExoplanetsClassification.git
 ```
 
-Go to into the imported directory (spark-ml-lr-ExoplanetsClassification) and run following command:
+Go into the imported directory (spark-ml-lr-ExoplanetsClassification) and run following command:
 
 ```
 sbt assembly
@@ -68,7 +68,7 @@ cd spark-2.0.0-bin-hadoop2.6/bin
 Submit the script. Give three parameters:
 
 * First: absolute path of the .jar (/homes/efokou/spark-ml-lr-ExoplanetsClassification-1.0.jar, for example)
-* Second: dataset file path, ie absolute path of the .parquet copied from the git repo (/homes/efokou/cleanedDataFrame.parquet, for example)
+* Second: dataset file path, ie absolute path of the .parquet copied from git repo (/homes/efokou/cleanedDataFrame.parquet, for example)
 * Third: absolute path of the model that will be saved (/homes/efokou/modelPlanet.model, for example)
 
 The script submission should go along the lines of...
