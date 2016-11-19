@@ -82,8 +82,12 @@ For example the authors used the following command for running the job:
 ```
 ./spark-submit --conf spark.eventLog.enabled=true --conf spark.eventLog.dir="/tmp" --driver-memory 3G --executor-memory 4G --class com.sparkProject.JobML /homes/efokou/spark-ml-lr-ExoplanetsClassification-1.0.jar /homes/efokou/cleanedDataFrame.parquet /homes/efokou/modelPlanet.model
 ```
-
-
+============
+Output
+============
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ericfokou/spark-ml-lr-ExoplanetsClassification/master/media/output.png" alt="Luminosity curve" height="300" width="450""/>
+</p>
 
 
 
