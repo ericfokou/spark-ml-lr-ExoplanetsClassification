@@ -1,26 +1,19 @@
 # spark-ml-lr-ExoplanetsClassification
 Build a classification model of exoplanets labeled "confirmed" or "false-positive". we will use Spark Machine Learning Logistic regression written in Scala for building our model.
 
-============
-Team
-============
-
+# Team
 
 * [Eric FOKOU](https://github.com/ericfokou/)
 * [Willie DROUHET](https://github.com/drwi)
-   
-=============
-Setup 
-=============
+
+# Setup 
 
 * Spark 2.0.0
 * Java 1.8
 * SBT
 * IntelliJ Community
 
-============
-Context
-============
+# Context
 
 Exoplanets are planets rotating around other stars than the Sun. Their study allows us to better understand how the solar system was formed, and a fraction of them could be conducive to the development of extraterrestrial life! They are detected in two steps:
 * A satellite (Kepler) observes the stars and locates those whose luminosity curve presents a "hollow", which could indicate that a planet has passed
@@ -31,15 +24,11 @@ Exoplanets are planets rotating around other stars than the Sun. Their study all
 </p>
 As there are about 200 billion stars in our galaxy, and therefore potentially as much (or even more!) Exoplanets, their detection must be automated to "scale up". The method of transits is already automatic (more than 22 million curves of luminosity recorded by Kepler), but not the confirmation of the candidate planets, hence the automatic classifier that we will build.
 
-============
-Data
-============
+# Data
 
 The data on exoplanets are public and accessible [link] (http://exoplanetarchive.ipac.caltech.edu/index.html). There are already 3388 confirmed exoplanets and about as many false positives, our classifier will be trained on these data. There is one exoplanet per line. The column of labels (what we are going to try to predict) is called "koi_disposition". You can retrieve the already cleaned dataset in parquet format in the project directly (cleanedDataFrame.parquet). The classifier will only use information from the brightness curves.
 
-============
-Installation
-============
+# Installation
 
 Download the project in a local directory
 
