@@ -44,9 +44,7 @@ sbt assembly
 
 N.B. : The generated file is located in spark-ml-lr-ExoplanetsClassification/target/scala-2.11/spark-ml-lr-ExoplanetsClassification-assembly-1.0.jar
 
-============
-Run
-============
+# Run
 
 Go to bin local directory of spark:
 
@@ -71,9 +69,8 @@ For example the authors used the following command for running the job:
 ```
 ./spark-submit --conf spark.eventLog.enabled=true --conf spark.eventLog.dir="/tmp" --driver-memory 3G --executor-memory 4G --class com.sparkProject.JobML /homes/efokou/spark-ml-lr-ExoplanetsClassification-1.0.jar /homes/efokou/cleanedDataFrame.parquet /homes/efokou/modelPlanet.model
 ```
-============
-Output
-============
+# Output
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/ericfokou/spark-ml-lr-ExoplanetsClassification/master/media/output.png" alt="Luminosity curve""/>
 </p>
